@@ -2,7 +2,6 @@
 {
     public class Car
     {
-
         public int CarID { get; set; }
         public string Model { get; set; }
 
@@ -17,7 +16,7 @@
         public int Km { get; set; }
         public byte PersonCount { get; set; }
         public int Year { get; set; }
-        public bool Status { get; set; }
+        public bool IsActive { get; set; }
 
         public int StatusID { get; set; }
         public Status Status { get; set; }
