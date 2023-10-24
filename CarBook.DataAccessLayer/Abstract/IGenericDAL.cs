@@ -4,7 +4,7 @@
     {
         void Insert(T entity);
         void Update(T entity);
-        void Delete(int id);
+        void Delete(T entity);
         List<T> GetListAll();
         T GetByID(int id);
     }

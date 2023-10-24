@@ -7,10 +7,9 @@ namespace CarBook.DataAccessLayer.Repositories
     {
         CarBookContext context = new CarBookContext();
 
-        public void Delete(int id)
+        public void Delete(T entity)
         {
-            var values = context.Set<T>().Find(id);
-            context.Remove(values);
+            context.Set<T>().Remove(entity);
             context.SaveChanges();
         }
 

@@ -1,0 +1,54 @@
+﻿@model List<CarBook.EntityLayer.Concrete.Brand>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+    int count = 0;
+}
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<h1>Markalar</h1>
+<div class="container">
+    <br />
+    <br />
+    <table class="table table-bordered">
+        <tr>
+            <th>#</th>
+            <th>Marka Adı</th>
+            <th>Durum</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+        </tr>
+        @foreach (var item in Model)
+        { 
+            count++;
+            <tr>               
+                <td>@count</td>
+                <td>@item.BrandName</td>
+                <td>@item.Status</td>
+                <td> <button onclick="deleteBrand(@item.BrandID)" type="submit" class="btn btn-outline-danger">Sil</button></td>
+                <td><a href="#" class="btn btn-success">Güncelle</a></td>
+            </tr>
+        }
+    </table>
+    <a href="#" class="btn btn-primary">Yeni Marka Girişi</a>
+</div>
+
+<script>
+    function deleteBrand(id) {
+        Swal.fire({
+            title: 'Silmek istediğinize emin misiniz?',
+            text: 'Bu öğeyi silerseniz geri alamazsınız!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sil',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Brand/DeleteBrand?id=" + id;
+            }
+        });
+    }
+</script>
