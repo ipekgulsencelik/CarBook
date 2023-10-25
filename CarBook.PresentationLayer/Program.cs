@@ -18,6 +18,9 @@ builder.Services.AddScoped<IStatusService, StatusManager>();
 builder.Services.AddScoped<ICarDAL, EFCarDAL>();
 builder.Services.AddScoped<ICarService, CarManager>();
 
+builder.Services.AddScoped<IPriceDAL, EFPriceDAL>();
+builder.Services.AddScoped<IPriceService, PriceManager>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

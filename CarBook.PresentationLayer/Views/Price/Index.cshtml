@@ -1,0 +1,53 @@
+﻿@model List<Price>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<h1>Araç Ödeme Planları</h1>
+<br />
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Araç</th>
+        <th>Ödeme Planı</th>
+        <th>Fiyat</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        count++;
+        <tr>
+            <th>@count</th>
+            <td>@item.Car.Brand.BrandName @item.Car.Model</td>
+            <td>@item.PriceType</td>
+            <td>@item.PriceValue ₺</td>
+            <td><button onclick="deletePrice(@item.PriceID)" type="submit" class="btn btn-outline-danger">Sil</button></td>
+            <td><a href="/Price/UpdatePrice/@item.PriceID" class="btn btn-outline-info">Güncelle</a></td>
+        </tr>
+    }
+</table>
+<a href="/Price/CreatePrice" class="btn btn-outline-primary">Yeni Araç Ödeme Planı Girişi</a>
+
+<script>
+    function deletePrice(id) {
+        Swal.fire({
+            title: 'Silmek istediğinize emin misiniz?',
+            text: 'Bu öğeyi silerseniz geri alamazsınız!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sil',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Price/DeletePrice?id=" + id; 
+            }
+        });
+    }
+</script>

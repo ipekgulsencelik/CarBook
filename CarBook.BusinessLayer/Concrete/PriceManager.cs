@@ -1,10 +1,11 @@
 ﻿using CarBook.BusinessLayer.Abstract;
 using CarBook.DataAccessLayer.Abstract;
+using CarBook.DataAccessLayer.EntityFramework;
 using CarBook.EntityLayer.Concrete;
 
 namespace CarBook.BusinessLayer.Concrete
 {
-    internal class PriceManager : IPriceService
+    public class PriceManager : IPriceService
     {
         private readonly IPriceDAL _priceDAL;
 
@@ -26,6 +27,11 @@ namespace CarBook.BusinessLayer.Concrete
         public List<Price> TGetListAll()
         {
             return _priceDAL.GetListAll();
+        }
+
+        public List<Price> TGetPricesWithCars()
+        {
+            return _priceDAL.GetPricesWithCars();
         }
 
         public void TInsert(Price entity)
