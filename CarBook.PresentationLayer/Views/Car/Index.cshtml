@@ -1,0 +1,69 @@
+﻿@using CarBook.EntityLayer.Concrete;
+@model List<Car>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<h1>Arabalar</h1>
+<div class="container">
+    <table class="table table-hover">
+        <tr>
+            <th>#</th>
+            <th>Model</th>
+            <th>Kategori</th>
+            <th>Marka</th>
+            <th>Vites Türü</th>
+            <th>Yıl</th>
+            <th>Araba Durumu</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+            <th>Detaylar</th>
+            <th>Sitede Gör</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <th>@count</th>
+                <td>@item.Model</td>
+                <td>@item.Category.CategoryName</td>
+                <td>@item.Brand.BrandName</td>
+                <td>@item.GearType</td>
+                <td>@item.Year</td>
+                <td>@item.Status.StatusName</td>
+                <td>
+                    <button onclick="deleteCar(@item.CarID)" type="submit" class="btn btn-outline-danger">Sil</button>
+                </td>
+                <td>
+                    <a href="/Car/UpdateCar/@item.CarID" class="btn btn-outline-info">Düzenle</a>
+                </td>
+                <td><a href="/Car/CarDetails/@item.CarID" class="btn btn-outline-dark">Detaylar</a></td>
+                <td><a href="#" class="btn btn-outline-warning">Sitede Gör</a></td>
+            </tr>
+        }
+    </table>
+    <br />
+    <a href="#" class="btn btn-outline-primary">Yeni Araç Ekle</a>
+</div>
+
+<script>
+    function deleteCar(id) {
+        Swal.fire({
+            title: 'Silmek istediğinize emin misiniz?',
+            text: 'Bu öğeyi silerseniz geri alamazsınız!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sil',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Car/DeleteCar?id=" + id; 
+            }
+        });
+    }
+</script>

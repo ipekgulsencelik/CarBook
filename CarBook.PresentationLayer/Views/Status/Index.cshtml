@@ -1,0 +1,61 @@
+﻿@using CarBook.EntityLayer.Concrete;
+@model List<Status>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<h1>Araba Durum Listesi</h1>
+<br />
+<div class="container">
+    <table class="table table-hover">
+        <tr>
+            <th>#</th>
+            <th>Durum</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+            <th>Araba Detayları</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <th>@count</th>
+                <td>@item.StatusName</td>
+                <td>
+                    <button onclick="deleteStatus(@item.StatusID)" type="submit" class="btn btn-outline-danger">Sil</button>
+                </td>
+                <td>
+                    <a href="/Status/UpdateStatus/@item.StatusID" class="btn btn-outline-info">Düzenle</a>
+                </td>
+                <td>
+                    <a href="/Status/StatusDetails/@item.StatusID" class="btn btn-outline-secondary">Detaylar</a>
+                </td>
+            </tr>
+        }
+    </table>
+    <br />
+    <a href="/Status/CreateStatus" class="btn btn-outline-dark">Yeni Durum Ekle</a>
+</div>
+
+<script>
+    function deleteStatus(id) {
+        Swal.fire({
+            title: 'Silmek istediğinize emin misiniz?',
+            text: 'Bu öğeyi silerseniz geri alamazsınız!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sil',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Status/RemoveStatus?id=" + id;
+            }
+        });
+    }
+</script>

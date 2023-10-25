@@ -12,6 +12,12 @@ builder.Services.AddDbContext<CarBookContext>();
 builder.Services.AddScoped<IBrandDAL, EFBrandDAL>();
 builder.Services.AddScoped<IBrandService, BrandManager>();
 
+builder.Services.AddScoped<IStatusDAL, EFStatusDAL>();
+builder.Services.AddScoped<IStatusService, StatusManager>();
+
+builder.Services.AddScoped<ICarDAL, EFCarDAL>();
+builder.Services.AddScoped<ICarService, CarManager>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

@@ -4,5 +4,6 @@ namespace CarBook.DataAccessLayer.Abstract
 {
     public interface ICarDAL : IGenericDAL<Car>
     {
+        List<Car> GetAllCarsWithBrands();
     }
 }

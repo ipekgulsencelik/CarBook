@@ -1,5 +1,6 @@
 ﻿using CarBook.BusinessLayer.Abstract;
 using CarBook.DataAccessLayer.Abstract;
+using CarBook.DataAccessLayer.EntityFramework;
 using CarBook.EntityLayer.Concrete;
 
 namespace CarBook.BusinessLayer.Concrete
@@ -16,6 +17,11 @@ namespace CarBook.BusinessLayer.Concrete
         public void TDelete(Car entity)
         {
             _carDAL.Delete(entity);
+        }
+
+        public List<Car> TGetAllCarsWithBrands()
+        {
+            return _carDAL.GetAllCarsWithBrands();
         }
 
         public Car TGetByID(int id)
