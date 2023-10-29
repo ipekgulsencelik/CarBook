@@ -1,9 +1,10 @@
 ﻿using CarBook.EntityLayer.Concrete;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarBook.DataAccessLayer.Concrete
 {
-    public class CarBookContext : DbContext
+    public class CarBookContext : IdentityDbContext<AppUser, AppRole, int>
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
