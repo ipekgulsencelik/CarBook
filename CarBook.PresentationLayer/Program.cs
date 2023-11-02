@@ -24,6 +24,12 @@ builder.Services.AddScoped<ICarService, CarManager>();
 builder.Services.AddScoped<IPriceDAL, EFPriceDAL>();
 builder.Services.AddScoped<IPriceService, PriceManager>();
 
+builder.Services.AddScoped<IServiceDAL, EFServiceDAL>();
+builder.Services.AddScoped<IServiceService, ServiceManager>();
+
+builder.Services.AddScoped<IHowItWorksStepDAL, EFHowItWorksStepDAL>();
+builder.Services.AddScoped<IHowItWorksStepService, HowItWorksStepManager>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
