@@ -4,12 +4,13 @@ using CarBook.DataAccessLayer.Abstract;
 using CarBook.DataAccessLayer.Concrete;
 using CarBook.DataAccessLayer.EntityFramework;
 using CarBook.EntityLayer.Concrete;
+using CarBook.PresentationLayer.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<CarBookContext>();
-builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<CarBookContext>();
+builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<CarBookContext>().AddErrorDescriber<CustomIdentityValidator>();
 
 builder.Services.AddScoped<IBrandDAL, EFBrandDAL>();
 builder.Services.AddScoped<IBrandService, BrandManager>();
@@ -39,6 +40,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

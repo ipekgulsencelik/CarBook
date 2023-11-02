@@ -31,9 +31,16 @@ namespace CarBook.PresentationLayer.Controllers
                 UserName = model.UserName
             };
             var result = await _userManager.CreateAsync(appUser, model.Password);
-            if (result.Succeeded)
+            if (result.Succeeded && model.Password == model.ConfirmPassword)
             {
                 return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                foreach (var item in result.Errors)
+                {
+                    ModelState.AddModelError("", item.Description);
+                }
             }
             return View();
         }
