@@ -30,6 +30,12 @@ builder.Services.AddScoped<IServiceService, ServiceManager>();
 builder.Services.AddScoped<IHowItWorksStepDAL, EFHowItWorksStepDAL>();
 builder.Services.AddScoped<IHowItWorksStepService, HowItWorksStepManager>();
 
+builder.Services.AddScoped<ICategoryDAL, EFCategoryDAL>();
+builder.Services.AddScoped<ICategoryService, CategoryManager>();
+
+builder.Services.AddScoped<ICarDetailDAL, EFCarDetailDAL>();
+builder.Services.AddScoped<ICarDetailService, CarDetailManager>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

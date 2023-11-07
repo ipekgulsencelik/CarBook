@@ -22,5 +22,7 @@
         public Status Status { get; set; }
         
         public List<Price> Prices { get; set; }
+
+        public List<CarDetail> CarDetails { get; set; }
     }
 }
