@@ -11,7 +11,7 @@
                 <p class="lead">@ViewBag.description</p>
 
                 <div class="pt-5">
-                    @await Component.InvokeAsync("_CarDetailCommentViewComponentPartial")
+                    @await Component.InvokeAsync("_CarDetailCommentViewComponentPartial", new {id=ViewBag.id})
 
                     @await Component.InvokeAsync("_CarDetailLeaveCommentViewComponentPartial")
                 </div>
@@ -29,8 +29,8 @@
 
                 @await Component.InvokeAsync("_CarDetailCategoryViewComponentPartial")
 
-                @await Component.InvokeAsync("_CarDetailAboutAuthorViewComponentPartial") 
-                
+                @await Component.InvokeAsync("_CarDetailAboutAuthorViewComponentPartial", new {id=ViewBag.id})
+
                 <div class="sidebar-box">
                     <h3 class="text-black">Paragraph</h3>
                     <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>

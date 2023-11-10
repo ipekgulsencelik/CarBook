@@ -32,6 +32,11 @@ namespace CarBook.BusinessLayer.Concrete
             return _carDetailDAL.GetCarDetailByCarID(id);
         }
 
+        public CarDetail TGetCarDetailWithAuthor(int id)
+        {
+            return _carDetailDAL.GetCarDetailWithAuthor(id);
+        }
+
         public List<CarDetail> TGetListAll()
         {
             return _carDetailDAL.GetListAll();

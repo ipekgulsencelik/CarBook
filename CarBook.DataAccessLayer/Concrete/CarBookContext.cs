@@ -20,6 +20,7 @@ namespace CarBook.DataAccessLayer.Concrete
         public DbSet<Service> Services { get; set; }
         public DbSet<HowItWorksStep> HowItWorksSteps { get; set; }
         public DbSet<CarDetail> CarDetails { get; set; }
+        public DbSet<Comment> Comments { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<ContactForm> ContactForms { get; set; }
         public DbSet<ContactInfo> ContactInfos { get; set; }
