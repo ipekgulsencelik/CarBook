@@ -25,5 +25,6 @@ namespace CarBook.DataAccessLayer.Concrete
         public DbSet<ContactForm> ContactForms { get; set; }
         public DbSet<ContactInfo> ContactInfos { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Testimonial> Testimonials { get; set; }
     }
 }

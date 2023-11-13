@@ -40,6 +40,9 @@ builder.Services.AddScoped<ICarDetailService, CarDetailManager>();
 builder.Services.AddScoped<ICommentDAL, EFCommentDAL>();
 builder.Services.AddScoped<ICommentService, CommentManager>();
 
+builder.Services.AddScoped<ITestimonialDAL, EFTestimonialDAL>();
+builder.Services.AddScoped<ITestimonialService, TestimonialManager>();
+
 builder.Services.AddControllersWithViews().AddFluentValidation();
 
 var app = builder.Build();

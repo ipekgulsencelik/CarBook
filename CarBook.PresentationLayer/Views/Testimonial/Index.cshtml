@@ -1,0 +1,58 @@
+﻿@model List<Testimonial>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-block">
+                <h3>Referans Listesi</h3>
+                <br />
+                <table class="table table-bordered">
+                    <tr>
+                        <th>#</th>
+                        <th>Görsel</th>
+                        <th>Referans Adı-Soyadı</th>
+                        <th>Yorum</th>
+                        <th>Sil</th>
+                        <th>Güncelle</th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        count++;
+                        <tr>
+                            <td>@count</td>
+                            <td><img src="~/images/@item.ImageURL" style="height:50px; width:50px; border-radius:50%" /></td>
+                            <td>@item.FullName</td>
+                            @if (@item.Comment == null ||
+                           @item.Comment.Length <= 10)
+                            {
+                                <td>@item.Comment</td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <a href="#" id="DescriptionBtn"
+                                       onclick="return confirm('@item.Comment');">
+                                        @item.Comment.Substring(0, 10)...
+                                    </a>
+                                </td>
+                            }
+                            <td>
+                                <a href="/Testimonial/DeleteTestimonial/@item.TestimonialID" class="btn btn-outline-danger" id="DeleteBtn"
+                                   onclick="return confirm('Silmek istediğinize emin misiniz?');">Sil</a>
+                            </td>
+                            <td><a href="/Testimonial/UpdateTestimonial/@item.TestimonialID" class="btn btn-outline-success">Güncelle</a></td>
+                        </tr>
+                    }
+                </table>
+                <a href="/Testimonial/CreateTestimonial/" class="btn btn-outline-primary">Yeni Referans Girişi</a>
+            </div>
+        </div>
+    </div>
+</div>
+

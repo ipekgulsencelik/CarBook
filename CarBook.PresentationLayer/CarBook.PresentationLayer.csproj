@@ -46,4 +46,8 @@
     <ProjectReference Include="..\CarBook.EntityLayer\CarBook.EntityLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>
