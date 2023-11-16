@@ -17,7 +17,9 @@ namespace CarBook.PresentationLayer.Controllers
 
         public IActionResult Index()
         {
-            var values = _serviceService.TGetListAll();
+            ViewBag.mainTitle = "Hizmetlerimiz";
+            ViewBag.subTitle = "Sizin İçin Hizmet Listemiz";
+            var values = _serviceService.TGetActiveServices();
             return View(values);
         }
 
@@ -52,6 +54,41 @@ namespace CarBook.PresentationLayer.Controllers
                 }
                 return View();
             }
+        }
+
+        public IActionResult UpdateIsHome(int id)
+        {
+            var value = _serviceService.TGetByID(id);
+            _serviceService.TUpdateIsHome(value);
+            return RedirectToAction("ServiceList");
+        }
+
+        public IActionResult UpdateServiceStatus(int id)
+        {
+            var value = _serviceService.TGetByID(id);
+            _serviceService.TUpdateStatus(value);
+            return RedirectToAction("ServiceList");
+        }
+
+        public IActionResult DeleteService(int id)
+        {
+            var value = _serviceService.TGetByID(id);
+            _serviceService.TDelete(value);
+            return RedirectToAction("ServiceList");
+        }
+
+        [HttpGet]
+        public IActionResult UpdateService(int id)
+        {
+            var value = _serviceService.TGetByID(id);
+            return View(value);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateService(Service service)
+        {
+            _serviceService.TUpdate(service);
+            return RedirectToAction("ServiceList");
         }
     }
 }

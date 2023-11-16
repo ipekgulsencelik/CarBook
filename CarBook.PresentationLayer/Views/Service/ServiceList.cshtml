@@ -6,12 +6,17 @@
     int count = 0;
 }
 
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <h1>Hizmet Listesi</h1>
 <br />
 <table class="table table-bordered">
     <tr>
         <th>#</th>
         <th>Hizmet Başlığı</th>
+        <th>Ana Sayfa</th>
+        <th>Durum</th>
         <th>Sil</th>
         <th>Güncelle</th>
     </tr>
@@ -21,9 +26,86 @@
         <tr>
             <td>@count</td>
             <td>@item.Title</td>
-            <td><a href="/Service/DeleteService/@item.ServiceID" class="btn btn-outline-danger">Sil</a></td>
+            <td>
+                @{
+                    if (item.IsHome == true)
+                    {
+                        <button onclick="updateIsHome(@item.ServiceID)" type="submit" class="btn btn-success">Evet</button>
+                    }
+                    else
+                    {
+                        <button onclick="updateIsHome(@item.ServiceID)" type="submit" class="btn btn-danger">Hayır</button>
+                    }
+                }
+            </td>
+            <td>
+                @{
+                    if (item.Status == true)
+                    {
+                        <button onclick="updateStatus(@item.ServiceID)" type="submit" class="btn btn-success">Aktif</button>
+                    }
+                    else
+                    {
+                        <button onclick="updateStatus(@item.ServiceID)" type="submit" class="btn btn-danger">Pasif</button>
+                    }
+                }
+            </td>
+            <td>
+                <button onclick="deleteService(@item.ServiceID)" type="submit" class="btn btn-outline-danger">Sil</button>
+            </td>
             <td><a href="/Service/UpdateService/@item.ServiceID" class="btn btn-outline-primary">Güncelle</a></td>
         </tr>
     }
 </table>
 <a href="/Service/CreateService/" class="btn btn-outline-primary">Yeni Hizmet Girişi</a>
+
+<script>
+    function deleteService(id) {
+        Swal.fire({
+            title: 'Silmek istediğinize emin misiniz?',
+            text: 'Bu öğeyi silerseniz geri alamazsınız!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sil',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Service/DeleteService?id=" + id;
+            }
+        });
+    }
+</script>
+
+<script>
+    function updateIsHome(id) {
+        Swal.fire({
+            title: 'Silmek istediğinize emin misiniz?',
+            text: 'Bu öğeyi silerseniz geri alamazsınız!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sil',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Service/UpdateIsHome?id=" + id;
+            }
+        });
+    }
+</script>
+
+<script>
+    function updateStatus(id) {
+        Swal.fire({
+            title: 'Silmek istediğinize emin misiniz?',
+            text: 'Bu öğeyi silerseniz geri alamazsınız!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sil',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Service/UpdateServiceStatus?id=" + id;
+            }
+        });
+    }
+</script>
