@@ -6,9 +6,9 @@ namespace CarBook.PresentationLayer.ViewComponents.DefaultComponents
 {
 	public class _DefaultTestimonialViewComponentPartial : ViewComponent
 	{
-		private readonly IGenericService<Testimonial> _testimonialService;
+		private readonly ITestimonialService _testimonialService;
 
-		public _DefaultTestimonialViewComponentPartial(IGenericService<Testimonial> testimonialService)
+		public _DefaultTestimonialViewComponentPartial(ITestimonialService testimonialService)
 		{
 			_testimonialService = testimonialService;
 		}

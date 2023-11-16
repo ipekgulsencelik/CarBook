@@ -4,5 +4,5 @@ namespace CarBook.DataAccessLayer.Abstract
 {
 	public interface ITestimonialDAL : IGenericDAL<Testimonial>
 	{
-	}
+    }
 }

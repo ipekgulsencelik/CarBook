@@ -43,6 +43,12 @@ builder.Services.AddScoped<ICommentService, CommentManager>();
 builder.Services.AddScoped<ITestimonialDAL, EFTestimonialDAL>();
 builder.Services.AddScoped<ITestimonialService, TestimonialManager>();
 
+builder.Services.AddScoped<IContactInfoDAL, EFContactInfoDAL>();
+builder.Services.AddScoped<IContactInfoService, ContactInfoManager>();
+
+builder.Services.AddScoped<ITeamDAL, EFTeamDAL>();
+builder.Services.AddScoped<ITeamService, TeamManager>();
+
 builder.Services.AddControllersWithViews().AddFluentValidation();
 
 var app = builder.Build();

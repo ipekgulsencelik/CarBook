@@ -6,6 +6,13 @@ namespace CarBook.PresentationLayer.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.mainTitle = "İletişim";
+            ViewBag.subTitle = "Sizin İçin İletişim Kanallarımız";
+            return View();
+        }
+
+        public IActionResult ContactInfoList()
+        {
             return View();
         }
     }

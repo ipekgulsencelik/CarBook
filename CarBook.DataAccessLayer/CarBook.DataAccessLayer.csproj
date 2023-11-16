@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CarBook.DTOLayer\CarBook.DTOLayer.csproj" />
     <ProjectReference Include="..\CarBook.EntityLayer\CarBook.EntityLayer.csproj" />
   </ItemGroup>
 

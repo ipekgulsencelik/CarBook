@@ -1,11 +1,11 @@
 ﻿using CarBook.BusinessLayer.Abstract;
 using CarBook.DataAccessLayer.Abstract;
-using CarBook.DataAccessLayer.EntityFramework;
+using CarBook.DTOLayer.DTOs.CategoryDTOs;
 using CarBook.EntityLayer.Concrete;
 
 namespace CarBook.BusinessLayer.Concrete
 {
-    public class CarManager : ICarService
+	public class CarManager : ICarService
     {
         private readonly ICarDAL _carDAL;
 
@@ -33,7 +33,17 @@ namespace CarBook.BusinessLayer.Concrete
             return _carDAL.GetByID(0); // Araba Bulunamadı
         }
 
-        public List<Car> TGetListAll()
+        public List<CategoryDTO> TGetCategoryCount()
+        {
+            return _carDAL.GetCategoryCount();
+        }
+
+        public List<Car> TGetLast5Cars()
+		{
+			return _carDAL.GetLast5Cars();
+		}
+
+		public List<Car> TGetListAll()
         {
             // Bıu işlemi yapmaya yetkiliyse
             return _carDAL.GetListAll();

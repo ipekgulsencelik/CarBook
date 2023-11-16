@@ -10,7 +10,6 @@
     <Folder Include="DTOs\BrandDTOs\" />
     <Folder Include="DTOs\CarDTOs\" />
     <Folder Include="DTOs\LocationDTOs\" />
-    <Folder Include="DTOs\CategoryDTOs\" />
     <Folder Include="DTOs\StatusDTOs\" />
     <Folder Include="DTOs\PriceDTOs\" />
   </ItemGroup>
