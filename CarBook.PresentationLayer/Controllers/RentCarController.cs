@@ -23,7 +23,7 @@ namespace CarBook.PresentationLayer.Controllers
                 return View(data);
             }
 
-            var values = _carService.TGetListAll();
+            var values = _carService.TGetAllCarsWithBrands();
 
             return View(values);
         }

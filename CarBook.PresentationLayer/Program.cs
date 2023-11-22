@@ -6,6 +6,7 @@ using CarBook.DataAccessLayer.EntityFramework;
 using CarBook.EntityLayer.Concrete;
 using CarBook.PresentationLayer.Models;
 using FluentValidation.AspNetCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,6 +51,12 @@ builder.Services.AddScoped<ITeamDAL, EFTeamDAL>();
 builder.Services.AddScoped<ITeamService, TeamManager>();
 
 builder.Services.AddControllersWithViews().AddFluentValidation();
+
+builder.Services.AddControllersWithViews().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    options.JsonSerializerOptions.WriteIndented = true;
+});
 
 var app = builder.Build();
 

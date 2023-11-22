@@ -2,9 +2,9 @@
 {
     public class RentCarViewModel
     {
-        public int Car { get; set; }
-        public int Seat { get; set; }
+        public string Brand { get; set; }
+        public string GasType { get; set; }
         public string Transmission { get; set; }
-        public string Year { get; set; }
+        public int Year { get; set; }
     }
 }

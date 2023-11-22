@@ -1,0 +1,63 @@
+﻿@model List<Car>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/UILayout/Index.cshtml";
+}
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4">
+                    <div class="car-wrap rounded ftco-animate">
+                        <div class="img rounded d-flex align-items-end" style="background-image: url(@item.ImageURL);">
+                        </div>
+                        <div class="text">
+                            <h5 class="mr-5">
+                                <a href="/Car/CarDetails/@item.CarID">  @item.Brand.BrandName @item.Model</a>
+                            </h5>
+                            <h5 class="mr-5">Koltuk: @item.Seat</h5>
+                            <h5 class="mr-5"> Model Yılı: @item.Year</h5>  
+                            <h5 class="mr-5">Vites: @item.Transmission</h5>
+                            <div class="d-flex mb-3">
+                                <p class="price ml-auto">@item.RentPrice ₺ <span>/Gün</span></p>
+                            </div>
+                            <p class="d-flex mb-0 d-block">
+                                <a href="#" class="btn btn-primary py-2 mr-1">Hemen Kirala</a> 
+                                <a asp-action="CarDetails" asp-controller="Car" asp-route-id="@item.CarID" class="btn btn-secondary py-2 ml-1">Detaylar</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @if (!Model.Any())
+            {
+                <body>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            // Model null ise SweetAlert2 ile uyarı göster
+                            Swal.fire({
+                                title: 'Hata',
+                                text: 'Aradığınız kriterlere uygun araç bulunamadı',
+                                icon: 'error',
+                                showCancelButton: true,
+                                confirmButtonText: 'Tekrar Ara',
+                                cancelButtonText: 'İptal'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "/Default/Index"; 
+                                }
+                            });
+                        });
+                    </script>
+                </body>
+            }
+        </div>
+    </div>
+</section>

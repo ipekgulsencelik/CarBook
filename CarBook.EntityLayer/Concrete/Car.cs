@@ -19,6 +19,7 @@
         public byte Door { get; set; }
         public byte PersonCount { get; set; }
         public int Year { get; set; }
+        public string GasType { get; set; }
         public decimal RentPrice { get; set; }
         public bool IsActive { get; set; }
 

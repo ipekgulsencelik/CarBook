@@ -1,6 +1,8 @@
 ﻿using CarBook.BusinessLayer.Abstract;
+using CarBook.PresentationLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Text.Json;
 
 namespace CarBook.PresentationLayer.Controllers
 {
@@ -17,24 +19,24 @@ namespace CarBook.PresentationLayer.Controllers
         {
             var carList = _carService.TGetAllCarsWithBrands();
 
-            List<SelectListItem> cars = (from x in carList
-                                         select new SelectListItem
-                                         {
-                                             Text = x.Brand.BrandName + " " + x.Model,
-                                             Value = x.CarID.ToString()
-                                         }).ToList();
-            ViewBag.cars = cars;
+            var brandList = carList.Select(x => x.Brand.BrandName).Distinct().ToList();
+            IEnumerable<SelectListItem> brands = (from x in brandList
+                                                  select new SelectListItem
+                                                  {
+                                                      Text = x,
+                                                      Value = x
+                                                  }).ToList();
+            ViewBag.brands = brands;
 
-            var seatList = carList.Select(x => x.Seat).Distinct().ToList();
-            IEnumerable<SelectListItem> seats = (from x in seatList
+            var gasList = carList.Select(x => x.GasType).Distinct().ToList();
+            IEnumerable<SelectListItem> gasTypes = (from x in gasList
                                                     select new SelectListItem
                                                     {
-                                                        Text = x.ToString(),
-                                                        Value = x.ToString(),
+                                                        Text = x,
+                                                        Value = x,
 
                                                     }).ToList();
-
-            ViewBag.seats = seats;
+            ViewBag.gasTypes = gasTypes;
 
             var transmissionList = carList.Select(x => x.Transmission).Distinct().ToList();
             IEnumerable<SelectListItem> transmissions = (from x in transmissionList
@@ -76,24 +78,24 @@ namespace CarBook.PresentationLayer.Controllers
         {
             var carList = _carService.TGetAllCarsWithBrands();
 
-            List<SelectListItem> cars = (from x in carList
+            var brandList = carList.Select(x => x.Brand.BrandName).Distinct().ToList();
+            IEnumerable<SelectListItem> brands = (from x in brandList
                                          select new SelectListItem
                                          {
-                                             Text = x.Brand.BrandName + " " + x.Model,
-                                             Value = x.CarID.ToString()
+                                             Text = x,
+                                             Value = x
                                          }).ToList();
-            ViewBag.cars = cars;
+            ViewBag.brands = brands;
 
-            var seatList = carList.Select(x => x.Seat).Distinct().ToList();
-            IEnumerable<SelectListItem> seats = (from x in seatList
-                                                 select new SelectListItem
-                                                 {
-                                                     Text = x.ToString(),
-                                                     Value = x.ToString(),
+            var gasList = carList.Select(x => x.GasType).Distinct().ToList();
+            IEnumerable<SelectListItem> gasTypes = (from x in gasList
+                                                    select new SelectListItem
+                                                    {
+                                                        Text = x,
+                                                        Value = x,
 
-                                                 }).ToList();
-
-            ViewBag.seats = seats;
+                                                    }).ToList();
+            ViewBag.gasTypes = gasTypes;
 
             var transmissionList = carList.Select(x => x.Transmission).Distinct().ToList();
             IEnumerable<SelectListItem> transmissions = (from x in transmissionList
@@ -107,6 +109,30 @@ namespace CarBook.PresentationLayer.Controllers
             ViewBag.transmissions = transmissions;
 
             return PartialView();
+        }
+
+        [HttpPost]
+        public IActionResult RentCar(RentCarViewModel car)
+        {
+            ViewData["brand"] = car.Brand;
+            ViewData["year"] = car.Year;
+            ViewData["gasType"] = car.GasType;
+            ViewData["transmission"] = car.Transmission;
+
+            var values = _carService.TGetAllCarsWithBrands();
+
+            if (!string.IsNullOrEmpty(car.Brand) || car.Year != null || !string.IsNullOrEmpty(car.GasType) || !string.IsNullOrEmpty(car.Transmission))
+            {
+                var lowerCaseBrand = car.Brand.ToLower();
+                var lowerCaseGasType = car.GasType.ToLower();
+                var lowerCaseTransmission = car.Transmission.ToLower();
+                values = values.Where(x => x.Brand.BrandName.ToLower().Contains(lowerCaseBrand) && x.Year >= car.Year && x.Transmission.ToLower() == lowerCaseTransmission && x.GasType.ToLower() == lowerCaseGasType).ToList();
+
+                TempData["filteredCars"] = JsonSerializer.Serialize(values);
+                return RedirectToAction("Index", "RentCar");
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }
