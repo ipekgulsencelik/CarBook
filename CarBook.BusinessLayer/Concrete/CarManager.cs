@@ -38,6 +38,11 @@ namespace CarBook.BusinessLayer.Concrete
             return _carDAL.GetCategoryCount();
         }
 
+        public List<Car> TGetLast3Cars()
+        {
+            return _carDAL.GetLast3Cars();
+        }
+
         public List<Car> TGetLast5Cars()
 		{
 			return _carDAL.GetLast5Cars();

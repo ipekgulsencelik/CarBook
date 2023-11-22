@@ -8,5 +8,6 @@ namespace CarBook.BusinessLayer.Abstract
         List<Car> TGetAllCarsWithBrands();
         List<CategoryDTO> TGetCategoryCount();
         List<Car> TGetLast5Cars();
+        List<Car> TGetLast3Cars();
 	}
 }

@@ -12,16 +12,21 @@
         public Brand Brand { get; set; }
 
         public string ImageURL { get; set; }
-        public string GearType { get; set; }
         public int Km { get; set; }
+        public string Transmission { get; set; }
+        public byte Seat { get; set; }
+        public byte Luggage { get; set; }
+        public byte Door { get; set; }
         public byte PersonCount { get; set; }
         public int Year { get; set; }
+        public decimal RentPrice { get; set; }
         public bool IsActive { get; set; }
 
         public int StatusID { get; set; }
         public Status Status { get; set; }
         
         public List<Price> Prices { get; set; }
+        public List<CarFeature> CarFeatures { get; set; }
         public List<CarDetail> CarDetails { get; set; }
         public List<Comment> Comments { get; set; }
     }

@@ -2,10 +2,7 @@
 using CarBook.BusinessLayer.ValidationRules.TestimonialValidation;
 using CarBook.EntityLayer.Concrete;
 using FluentValidation.Results;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Mvc;
-using static System.Net.Mime.MediaTypeNames;
 using System.Drawing;
 using Font = System.Drawing.Font;
 using Image = System.Drawing.Image;

@@ -4,6 +4,7 @@ using CarBook.DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarBook.DataAccessLayer.Migrations
 {
     [DbContext(typeof(CarBookContext))]
-    partial class CarBookContextModelSnapshot : ModelSnapshot
+    [Migration("20231118212312_mig_edit_car")]
+    partial class mig_edit_car
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -164,159 +167,6 @@ namespace CarBook.DataAccessLayer.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("CarBook.EntityLayer.Concrete.Author", b =>
-                {
-                    b.Property<int>("AuthorID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AuthorID"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageURL")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("AuthorID");
-
-                    b.ToTable("Authors");
-                });
-
-            modelBuilder.Entity("CarBook.EntityLayer.Concrete.Banner", b =>
-                {
-                    b.Property<int>("BannerID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BannerID"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("BannerID");
-
-                    b.ToTable("Banners");
-                });
-
-            modelBuilder.Entity("CarBook.EntityLayer.Concrete.Blog", b =>
-                {
-                    b.Property<int>("BlogID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BlogID"));
-
-                    b.Property<int?>("AppUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AuthorID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("BlogCategoryID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CoverImageURL")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsHome")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("BlogID");
-
-                    b.HasIndex("AppUserId");
-
-                    b.HasIndex("AuthorID");
-
-                    b.HasIndex("BlogCategoryID");
-
-                    b.ToTable("Blogs");
-                });
-
-            modelBuilder.Entity("CarBook.EntityLayer.Concrete.BlogCategory", b =>
-                {
-                    b.Property<int>("BlogCategoryID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BlogCategoryID"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.HasKey("BlogCategoryID");
-
-                    b.ToTable("BlogCategories");
-                });
-
-            modelBuilder.Entity("CarBook.EntityLayer.Concrete.BlogComment", b =>
-                {
-                    b.Property<int>("BlogCommentID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BlogCommentID"));
-
-                    b.Property<int>("BlogID")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Score")
-                        .HasColumnType("int");
-
-                    b.HasKey("BlogCommentID");
-
-                    b.HasIndex("BlogID");
-
-                    b.ToTable("BlogComments");
-                });
-
             modelBuilder.Entity("CarBook.EntityLayer.Concrete.Brand", b =>
                 {
                     b.Property<int>("BrandID")
@@ -361,6 +211,9 @@ namespace CarBook.DataAccessLayer.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsHome")
+                        .HasColumnType("bit");
+
                     b.Property<int>("Km")
                         .HasColumnType("int");
 
@@ -373,9 +226,6 @@ namespace CarBook.DataAccessLayer.Migrations
 
                     b.Property<byte>("PersonCount")
                         .HasColumnType("tinyint");
-
-                    b.Property<decimal>("RentPrice")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<byte>("Seat")
                         .HasColumnType("tinyint");
@@ -429,34 +279,6 @@ namespace CarBook.DataAccessLayer.Migrations
                     b.HasIndex("CarID");
 
                     b.ToTable("CarDetails");
-                });
-
-            modelBuilder.Entity("CarBook.EntityLayer.Concrete.CarFeature", b =>
-                {
-                    b.Property<int>("CarFeatureID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CarFeatureID"));
-
-                    b.Property<int>("CarID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FeatureName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("HasFeature")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.HasKey("CarFeatureID");
-
-                    b.HasIndex("CarID");
-
-                    b.ToTable("CarFeatures");
                 });
 
             modelBuilder.Entity("CarBook.EntityLayer.Concrete.Category", b =>
@@ -787,34 +609,6 @@ namespace CarBook.DataAccessLayer.Migrations
                     b.ToTable("Services");
                 });
 
-            modelBuilder.Entity("CarBook.EntityLayer.Concrete.SocialMedia", b =>
-                {
-                    b.Property<int>("SocialMediaID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SocialMediaID"));
-
-                    b.Property<string>("Icon")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("URL")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("SocialMediaID");
-
-                    b.ToTable("SocialMedias");
-                });
-
             modelBuilder.Entity("CarBook.EntityLayer.Concrete.Status", b =>
                 {
                     b.Property<int>("StatusID")
@@ -830,31 +624,6 @@ namespace CarBook.DataAccessLayer.Migrations
                     b.HasKey("StatusID");
 
                     b.ToTable("Statuses");
-                });
-
-            modelBuilder.Entity("CarBook.EntityLayer.Concrete.TagCloud", b =>
-                {
-                    b.Property<int>("TagCloudID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TagCloudID"));
-
-                    b.Property<int>("BlogID")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("TagCloudID");
-
-                    b.HasIndex("BlogID");
-
-                    b.ToTable("TagClouds");
                 });
 
             modelBuilder.Entity("CarBook.EntityLayer.Concrete.Team", b =>
@@ -1014,40 +783,6 @@ namespace CarBook.DataAccessLayer.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("CarBook.EntityLayer.Concrete.Blog", b =>
-                {
-                    b.HasOne("CarBook.EntityLayer.Concrete.AppUser", null)
-                        .WithMany("Blogs")
-                        .HasForeignKey("AppUserId");
-
-                    b.HasOne("CarBook.EntityLayer.Concrete.Author", "Author")
-                        .WithMany("Blogs")
-                        .HasForeignKey("AuthorID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CarBook.EntityLayer.Concrete.BlogCategory", "BlogCategory")
-                        .WithMany("Blogs")
-                        .HasForeignKey("BlogCategoryID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Author");
-
-                    b.Navigation("BlogCategory");
-                });
-
-            modelBuilder.Entity("CarBook.EntityLayer.Concrete.BlogComment", b =>
-                {
-                    b.HasOne("CarBook.EntityLayer.Concrete.Blog", "Blog")
-                        .WithMany("BlogComments")
-                        .HasForeignKey("BlogID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Blog");
-                });
-
             modelBuilder.Entity("CarBook.EntityLayer.Concrete.Car", b =>
                 {
                     b.HasOne("CarBook.EntityLayer.Concrete.Brand", "Brand")
@@ -1094,17 +829,6 @@ namespace CarBook.DataAccessLayer.Migrations
                     b.Navigation("Car");
                 });
 
-            modelBuilder.Entity("CarBook.EntityLayer.Concrete.CarFeature", b =>
-                {
-                    b.HasOne("CarBook.EntityLayer.Concrete.Car", "Car")
-                        .WithMany("CarFeatures")
-                        .HasForeignKey("CarID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Car");
-                });
-
             modelBuilder.Entity("CarBook.EntityLayer.Concrete.Comment", b =>
                 {
                     b.HasOne("CarBook.EntityLayer.Concrete.Car", "Car")
@@ -1125,17 +849,6 @@ namespace CarBook.DataAccessLayer.Migrations
                         .IsRequired();
 
                     b.Navigation("Car");
-                });
-
-            modelBuilder.Entity("CarBook.EntityLayer.Concrete.TagCloud", b =>
-                {
-                    b.HasOne("CarBook.EntityLayer.Concrete.Blog", "Blog")
-                        .WithMany("TagClouds")
-                        .HasForeignKey("BlogID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Blog");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -1191,26 +904,7 @@ namespace CarBook.DataAccessLayer.Migrations
 
             modelBuilder.Entity("CarBook.EntityLayer.Concrete.AppUser", b =>
                 {
-                    b.Navigation("Blogs");
-
                     b.Navigation("CarDetails");
-                });
-
-            modelBuilder.Entity("CarBook.EntityLayer.Concrete.Author", b =>
-                {
-                    b.Navigation("Blogs");
-                });
-
-            modelBuilder.Entity("CarBook.EntityLayer.Concrete.Blog", b =>
-                {
-                    b.Navigation("BlogComments");
-
-                    b.Navigation("TagClouds");
-                });
-
-            modelBuilder.Entity("CarBook.EntityLayer.Concrete.BlogCategory", b =>
-                {
-                    b.Navigation("Blogs");
                 });
 
             modelBuilder.Entity("CarBook.EntityLayer.Concrete.Brand", b =>
@@ -1221,8 +915,6 @@ namespace CarBook.DataAccessLayer.Migrations
             modelBuilder.Entity("CarBook.EntityLayer.Concrete.Car", b =>
                 {
                     b.Navigation("CarDetails");
-
-                    b.Navigation("CarFeatures");
 
                     b.Navigation("Comments");
 

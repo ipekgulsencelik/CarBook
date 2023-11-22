@@ -38,6 +38,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
 	  <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0-preview.6.23329.11" />
+	  <PackageReference Include="PagedList" Version="1.17.0" />
   </ItemGroup>
 
   <ItemGroup>

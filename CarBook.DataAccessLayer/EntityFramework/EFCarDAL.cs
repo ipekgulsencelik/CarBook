@@ -27,10 +27,17 @@ namespace CarBook.DataAccessLayer.EntityFramework
             return categories;
         }
 
+        public List<Car> GetLast3Cars()
+        {
+            var context = new CarBookContext();
+            var values = context.Cars.Include(x => x.Category).Include(x => x.Brand).Include(x => x.Status).OrderByDescending(x => x.CarID).TakeLast(3).ToList();
+            return values;
+        }
+
         public List<Car> GetLast5Cars()
 		{
 			var context = new CarBookContext();
-			var values = context.Cars.Include(x => x.Category).Include(x => x.Brand).Include(x => x.Status).TakeLast(5).ToList();
+			var values = context.Cars.Include(x => x.Category).Include(x => x.Brand).Include(x => x.Status).OrderByDescending(x => x.CarID).TakeLast(5).ToList();
 			return values;
 		}
 	}

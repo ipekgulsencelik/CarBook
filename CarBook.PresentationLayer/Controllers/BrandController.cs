@@ -60,7 +60,8 @@ namespace CarBook.PresentationLayer.Controllers
             var values = from x in _brandService.TGetListAll() select x;
             if (!string.IsNullOrEmpty(filter)) 
             {
-                values = values.Where(y => y.BrandName.Contains(filter));
+                var lowerCaseName = filter.ToLower();
+                values = values.Where(y => y.BrandName.ToLower().Contains(lowerCaseName));
             }
             return View(values.ToList());
         }

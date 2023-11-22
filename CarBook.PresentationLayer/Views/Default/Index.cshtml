@@ -4,6 +4,8 @@
     Layout = "~/Views/Shared/_DefaultLayout.cshtml";
 }
 
+@await Html.PartialAsync("RentCar")
+
 <div class="ftco-blocks-cover-1">
     <div class="ftco-cover-1 overlay" style="background-image: url('/carbook-master/images/hero_1.jpg')">
         <div class="container">
@@ -186,6 +188,8 @@
 @await Component.InvokeAsync("_HowItWorksStepViewComponentPartial")
 
 @await Component.InvokeAsync("_DefaultTestimonialViewComponentPartial")
+
+@* @await Component.InvokeAsync("_DefaultBlogViewComponentPartial") *@
 
 <div class="site-section bg-white">
     <div class="container">

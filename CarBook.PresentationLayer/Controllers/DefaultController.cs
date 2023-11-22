@@ -8,5 +8,10 @@ namespace CarBook.PresentationLayer.Controllers
         {
             return View();
         }
+
+        public PartialViewResult RentCar()
+        {
+            return PartialView();
+        }
     }
 }

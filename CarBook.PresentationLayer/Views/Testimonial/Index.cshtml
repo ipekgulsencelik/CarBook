@@ -26,7 +26,7 @@
                         count++;
                         <tr>
                             <td>@count</td>
-                            <td><img src="~/images/@item.ImageURL" /></td>
+                            <td><img src="~/images/@item.ImageURL" style="height:50px; width:50px; border-radius:50%" /></td>
                             <td>@item.FullName</td>
                             @if (@item.Comment == null ||
                            @item.Comment.Length <= 10)

@@ -1,0 +1,28 @@
+﻿@model Team
+
+@{
+    ViewData["Title"] = "CreateTeam";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<h1>Yeni Referans Girişi</h1>
+<br />
+<form method="post" enctype="multipart/form-data">
+    <label>Ad</label>
+    <input type="text" asp-for="FullName" class="form-control" style="border:1px solid #2222" />
+    <span asp-validation-for="FullName" class="text-danger"></span>
+    <br />
+    <label>Ünvan</label>
+    <input type="text" asp-for="Title" class="form-control" style="border:1px solid #2222" />
+    <span asp-validation-for="Title" class="text-danger"></span>
+    <br />
+    <label>Görsel</label>
+    <input type="file" name="image" class="form-control" />
+    <br />
+    <label>Yorum</label>
+    <input type="text" asp-for="Description" class="form-control" style="border:1px solid #2222" />
+    <span asp-validation-for="Description" class="text-danger"></span>
+    <br />
+    <button class="btn btn-primary">Referans Ekle</button>
+</form>
+

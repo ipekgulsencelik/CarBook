@@ -10,5 +10,6 @@ namespace CarBook.EntityLayer.Concrete
         public string? ImageURL { get; set; }
 
         public List<CarDetail> CarDetails { get; set; }
+        public List<Blog> Blogs { get; set; }
     }
 }

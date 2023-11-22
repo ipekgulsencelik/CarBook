@@ -8,5 +8,6 @@ namespace CarBook.DataAccessLayer.Abstract
         List<Car> GetAllCarsWithBrands();
         List<CategoryDTO> GetCategoryCount();
         List<Car> GetLast5Cars();
+        List<Car> GetLast3Cars();
     }
 }
