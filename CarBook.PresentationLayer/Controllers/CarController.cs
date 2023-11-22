@@ -1,5 +1,7 @@
 ﻿using CarBook.BusinessLayer.Abstract;
+using CarBook.PresentationLayer.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using PagedList;
 
 namespace CarBook.PresentationLayer.Controllers
@@ -17,6 +19,7 @@ namespace CarBook.PresentationLayer.Controllers
 
         public IActionResult Index(int page=1)
         {
+            
             var cars = _carService.TGetAllCarsWithBrands();
             var values = cars.ToPagedList(page, 3);
             return View(values);
