@@ -1,4 +1,6 @@
-﻿namespace CarBook.EntityLayer.Concrete
+﻿using System.Text.Json.Serialization;
+
+namespace CarBook.EntityLayer.Concrete
 {
     public class Car
     {
@@ -6,9 +8,11 @@
         public string Model { get; set; }
 
         public int CategoryID { get; set; }
+        [JsonIgnore]
         public Category Category { get; set; }
         
         public int BrandID { get; set; }
+        [JsonIgnore]
         public Brand Brand { get; set; }
 
         public string ImageURL { get; set; }
@@ -24,6 +28,7 @@
         public bool IsActive { get; set; }
 
         public int StatusID { get; set; }
+        [JsonIgnore]
         public Status Status { get; set; }
         
         public List<Price> Prices { get; set; }

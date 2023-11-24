@@ -40,6 +40,8 @@
 	  <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0-preview.6.23329.11" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	  <PackageReference Include="PagedList" Version="1.17.0" />
+	  <PackageReference Include="X.PagedList" Version="8.4.7" />
+	  <PackageReference Include="X.PagedList.Mvc.Core" Version="8.4.7" />
   </ItemGroup>
 
   <ItemGroup>

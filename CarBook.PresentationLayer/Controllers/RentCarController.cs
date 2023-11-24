@@ -19,6 +19,7 @@ namespace CarBook.PresentationLayer.Controllers
             if (TempData["filteredCars"] != null)
             {
                 var cars = TempData["filteredCars"];
+                ViewBag.brand= TempData["brandName"];
                 var data = JsonSerializer.Deserialize<List<Car>>(cars.ToString());
                 return View(data);
             }

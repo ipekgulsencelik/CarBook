@@ -1,0 +1,66 @@
+﻿@model ContactForm
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<form asp-action="SendMessage" class="bg-light p-5 contact-form" method="post" onsubmit="return validateForm()">
+    <div class="form-group row">
+        <div class="col-md-6 mb-4 mb-lg-0">
+            <input type="text" asp-for="FirstName" class="form-control" placeholder="First name">
+        </div>
+        <div class="col-md-6">
+            <input type="text" asp-for="LastName" class="form-control" placeholder="First name">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-12">
+            <input type="email" asp-for="Email" class="form-control" placeholder="Email Adresiniz (* zorunlu)">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-12">
+            <textarea asp-for="Message" cols="30" rows="10" class="form-control" placeholder="Mesajınız (* zorunlu)"></textarea>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6 mr-auto">
+            <input type="submit" class="btn btn-block btn-primary text-white py-3 px-5" value="Gönder">
+        </div>
+    </div>
+</form>
+
+<script>
+    function validateForm() {
+        var firstnameValue = document.getElementById('FirstName').value;
+        var lastnameValue = document.getElementById('LastName').value;
+        var emailValue = document.getElementById('Email').value;
+        var messageValue = document.getElementById('Message').value;
+
+        if (firstnameValue.trim() === '' || emailValue.trim() === '' || lastnameValue.trim() === '' || messageValue.trim() === '') {
+            // Gerekli alanlar doldurulmamışsa SweetAlert gösterme
+            Swal.fire({
+                title: 'Hata',
+                text: 'Lütfen tüm gerekli alanları doldurun!',
+                icon: 'error',
+                showCancelButton: false,
+                confirmButtonText: 'Tamam',
+            });
+
+            return false; // Formun gönderilmesini engelle
+        }
+
+        // Gerekli alanlar doldurulmuşsa SweetAlert gösterme
+        Swal.fire({
+            title: 'Tebrikler',
+            text: 'Mesajınız Gönderildi! Size en kısa sürede cevap verilecektir.',
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonText: 'Tamam',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Contact/Index"; 
+            }
+        });
+        return true; // Formu gönder
+    }
+</script>

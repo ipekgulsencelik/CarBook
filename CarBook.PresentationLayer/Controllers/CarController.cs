@@ -1,8 +1,6 @@
 ﻿using CarBook.BusinessLayer.Abstract;
-using CarBook.PresentationLayer.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using PagedList;
+using X.PagedList;
 
 namespace CarBook.PresentationLayer.Controllers
 {

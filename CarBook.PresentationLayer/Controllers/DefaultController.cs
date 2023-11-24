@@ -129,6 +129,7 @@ namespace CarBook.PresentationLayer.Controllers
                 values = values.Where(x => x.Brand.BrandName.ToLower().Contains(lowerCaseBrand) && x.Year >= car.Year && x.Transmission.ToLower() == lowerCaseTransmission && x.GasType.ToLower() == lowerCaseGasType).ToList();
 
                 TempData["filteredCars"] = JsonSerializer.Serialize(values);
+                TempData["brandName"] = car.Brand;
                 return RedirectToAction("Index", "RentCar");
             }
 

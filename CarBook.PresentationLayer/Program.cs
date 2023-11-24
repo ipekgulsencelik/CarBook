@@ -47,6 +47,9 @@ builder.Services.AddScoped<ITestimonialService, TestimonialManager>();
 builder.Services.AddScoped<IContactInfoDAL, EFContactInfoDAL>();
 builder.Services.AddScoped<IContactInfoService, ContactInfoManager>();
 
+builder.Services.AddScoped<IContactFormDAL, EFContactFormDAL>();
+builder.Services.AddScoped<IContactFormService, ContactFormManager>();
+
 builder.Services.AddScoped<ITeamDAL, EFTeamDAL>();
 builder.Services.AddScoped<ITeamService, TeamManager>();
 

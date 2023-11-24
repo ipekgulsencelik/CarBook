@@ -1,9 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CarBook.BusinessLayer.Abstract;
+using CarBook.EntityLayer.Concrete;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CarBook.PresentationLayer.Controllers
 {
     public class ContactController : Controller
     {
+        private readonly IContactFormService _contactFormService;
+
+        public ContactController(IContactFormService contactFormService)
+        {
+            _contactFormService = contactFormService;
+        }
+
         public IActionResult Index()
         {
             ViewBag.mainTitle = "İletişim";
@@ -21,17 +30,16 @@ namespace CarBook.PresentationLayer.Controllers
             return PartialView();
         }
 
-        //[HttpPost]
-        //public IActionResult SendMessage(Message message)
-        //{
-
-        //    if (message.Name != null && message.Subject != null && message.Email != null && message.MessageBody != null)
-        //    {
-        //        ViewBag.message = "Model is valid";
-        //        _messageService.TInsert(message);
-        //        return NoContent();
-        //    }
-        //    return NoContent();
-        //}
+        [HttpPost]
+        public IActionResult SendMessage(ContactForm message)
+        {
+            if (message.FirstName != null && message.LastName != null && message.Email != null && message.Message != null)
+            {
+                ViewBag.message = "Model is valid";
+                _contactFormService.TInsert(message);
+                return NoContent();
+            }
+            return NoContent();
+        }
     }
 }
