@@ -12,7 +12,7 @@ namespace CarBook.PresentationLayer.ViewComponents.AboutComponents
             _aboutService = aboutService;
         }
 
-        public IViewComponentResult Invoke(int id)
+        public IViewComponentResult Invoke()
         {
             var value = _aboutService.TGetAbout();
             return View(value);
