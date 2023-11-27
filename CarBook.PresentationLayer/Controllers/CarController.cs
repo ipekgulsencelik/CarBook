@@ -37,9 +37,25 @@ namespace CarBook.PresentationLayer.Controllers
             ViewBag.mainTitle = "Araç Detayları";
             ViewBag.subTitle = "Son Araç Detayları";
             ViewBag.id = id;
-            var value = _carDetailService.TGetCarDetailByCarID(id);
-            ViewBag.description = value.Description;
-            return View(value);
+            //var value = _carDetailService.TGetCarDetailByCarID(id);
+            //ViewBag.description = value.Description;
+            //return View(value);
+            return View();
         }
+
+        public PartialViewResult MakeComment(int id)
+        {
+            ViewBag.id = id;
+            return PartialView();
+        }
+
+        //[HttpPost]
+        //public IActionResult MakeComment(ReviewDto reviewDto)
+        //{
+        //    var newReview = _mapper.Map<Review>(reviewDto);
+        //    newReview.CommentDate = DateTime.Now;
+        //    _reviewService.TInsert(newReview);
+        //    return RedirectToAction("Index");
+        //}
     }
 }
