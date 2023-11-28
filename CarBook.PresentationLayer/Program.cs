@@ -38,6 +38,9 @@ builder.Services.AddScoped<ICategoryService, CategoryManager>();
 builder.Services.AddScoped<ICarDetailDAL, EFCarDetailDAL>();
 builder.Services.AddScoped<ICarDetailService, CarDetailManager>();
 
+builder.Services.AddScoped<ICarFeatureDAL, EFCarFeatureDAL>();
+builder.Services.AddScoped<ICarFeatureService, CarFeatureManager>();
+
 builder.Services.AddScoped<ICommentDAL, EFCommentDAL>();
 builder.Services.AddScoped<ICommentService, CommentManager>();
 
@@ -53,6 +56,9 @@ builder.Services.AddScoped<IContactFormService, ContactFormManager>();
 builder.Services.AddScoped<ITeamDAL, EFTeamDAL>();
 builder.Services.AddScoped<ITeamService, TeamManager>();
 
+builder.Services.AddScoped<IAboutDAL, EFAboutDAL>();
+builder.Services.AddScoped<IAboutService, AboutManager>();
+
 builder.Services.AddControllersWithViews().AddFluentValidation();
 
 builder.Services.AddControllersWithViews().AddJsonOptions(options =>
@@ -60,6 +66,8 @@ builder.Services.AddControllersWithViews().AddJsonOptions(options =>
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
     options.JsonSerializerOptions.WriteIndented = true;
 });
+
+builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
 

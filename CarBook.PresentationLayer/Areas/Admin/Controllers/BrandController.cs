@@ -1,4 +1,5 @@
 ﻿using CarBook.BusinessLayer.Abstract;
+using CarBook.EntityLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarBook.PresentationLayer.Areas.Admin.Controllers
@@ -25,52 +26,46 @@ namespace CarBook.PresentationLayer.Areas.Admin.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public IActionResult AddBrand(BrandDTO brandDTO)
-        //{
-        //    brandDTO.Status = true;
-        //    _brandService.TInsert(_mapper.Map<Brand>(brandDTO));
-        //    return RedirectToAction("Index", "Brand");
-        //}
+        [HttpPost]
+        public IActionResult AddBrand(Brand brand)
+        {
+            brand.Status = true;
+            _brandService.TInsert(brand);
+            return RedirectToAction("Index", "Brand");
+        }
 
         public IActionResult DeleteBrand(int id)
         {
-           // _brandService.TDelete(id);
+            var value = _brandService.TGetByID(id);
+            _brandService.TDelete(value);
             return RedirectToAction("Index");
         }
 
-        //[HttpGet]
-        //public IActionResult UpdateBrand(int id)
-        //{
-        //    var brand = _brandService.TGetByID(id);
-        //    var value = _mapper.Map<BrandDTO>(brand);
-        //    return View(value);
-        //}
-        
-        //[HttpPost]
-        //public IActionResult UpdateBrand(BrandDTO brandDTO)
-        //{
-        //    brandDto.Status = true;
-        //    _brandService.TUpdate(_mapper.Map<Brand>(brandDto));
-        //    return RedirectToAction("Index");
-        //}
+        [HttpGet]
+        public IActionResult UpdateBrand(int id)
+        {
+            var value = _brandService.TGetByID(id);
+            return View(value);
+        }
 
-        //public IActionResult GetBrandsSearchByName(string name)
-        //{
-        //    ViewData["CurrentFilter"] = name;
+        [HttpPost]
+        public IActionResult UpdateBrand(Brand brand)
+        {
+            brand.Status = true;
+            _brandService.TUpdate(brand);
+            return RedirectToAction("Index");
+        }
 
-        //    var values = _brandService.TGetList();
-
-        //    if (!string.IsNullOrEmpty(name))
-        //    {
-        //        var lowerCaseName = name.ToLower();
-        //        values = values.Where(x => x.BrandName.ToLower().Contains(lowerCaseName)).ToList();
-        //    }
-        //    return View(values);
-        //}
-    }
-
-    public interface IMapper
-    {
+        public IActionResult GetBrandSearchByName(string filter)
+        {
+            ViewData["CurrentFilter"] = filter;
+            var values = from x in _brandService.TGetListAll() select x;
+            if (!string.IsNullOrEmpty(filter))
+            {
+                var lowerCaseName = filter.ToLower();
+                values = values.Where(y => y.BrandName.ToLower().Contains(lowerCaseName));
+            }
+            return View(values.ToList());
+        }
     }
 }

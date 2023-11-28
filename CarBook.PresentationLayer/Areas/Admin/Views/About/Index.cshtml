@@ -1,0 +1,132 @@
+﻿@model List<About>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<div class="container">
+    <br />
+    <h1>Hizmet Listesi</h1>
+    <br />
+    <table class="table table-bordered">
+        <tr>
+            <th>#</th>
+            <th>Görsel</th>
+            <th>Başlık</th>
+            <th>Açıklama</th>
+            <th>Alt Açıklama</th>
+            <th>Durum</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <td>@count</td>
+                <td><img src="~/images/@item.ImageURL" style="height:50px; width:50px;" /></td>
+                <td>@item.Title</td>
+                @if (@item.Description == null || @item.Description.Length <= 30)
+                {
+                    <td>@item.Description</td>
+                }
+                else
+                {
+                    <td>
+                        <a href="#" id="DescriptionBtn"
+                           onclick="return descriptionAbout('@item.Description', '@item.AboutID')">
+                            @item.Description.Substring(0, 10)...
+                        </a>
+                    </td>
+                }
+                @if (@item.SubDescription == null || @item.SubDescription.Length <= 30)
+                {
+                    <td>@item.SubDescription</td>
+                }
+                else
+                {
+                    <td>
+                        <a href="#" id="SubDescriptionBtn"
+                           onclick="return alert('@item.SubDescription');">
+                            @item.SubDescription.Substring(0, 10)...
+                        </a>
+                    </td>
+                }
+                <td>
+                    @{
+                        if (item.Status == true)
+                        {
+                            <button onclick="updateStatus(@item.AboutID)" type="submit" class="btn btn-success">Aktif</button>
+                        }
+                        else
+                        {
+                            <button onclick="updateStatus(@item.AboutID)" type="submit" class="btn btn-danger">Pasif</button>
+                        }
+                    }
+                </td>
+                <td>
+                    <button onclick="deleteAbout(@item.AboutID)" type="submit" class="btn btn-outline-danger">Sil</button>
+                </td>
+                <td><a href="/About/UpdateAbout/@item.AboutID" class="btn btn-outline-primary">Güncelle</a></td>
+            </tr>
+        }
+    </table>
+    <a href="/About/CreateAbout/" class="btn btn-outline-primary">Yeni Hakkımızda Girişi</a>
+</div>
+
+
+<script>
+    function descriptionAbout(description, id) {
+        Swal.fire({
+            title: 'Açıklama',
+            text: description,
+            icon: 'success',
+            showCancelButton: true,
+            confirmButtonText: 'Güncelle',
+            cancelButtonText: 'Tamam'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/About/UpdateAbout?id=" + id;
+            }
+        });
+    }
+</script>
+
+<script>
+    function deleteAbout(id) {
+        Swal.fire({
+            title: 'Silmek istediğinize emin misiniz?',
+            text: 'Bu öğeyi silerseniz geri alamazsınız!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sil',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/About/DeleteAbout?id=" + id;
+            }
+        });
+    }
+</script>
+
+<script>
+    function updateStatus(id) {
+        Swal.fire({
+            title: 'Silmek istediğinize emin misiniz?',
+            text: 'Bu öğeyi silerseniz geri alamazsınız!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sil',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Service/UpdateServiceStatus?id=" + id;
+            }
+        });
+    }
+</script>

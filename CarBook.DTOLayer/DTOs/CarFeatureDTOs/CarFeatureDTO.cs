@@ -1,6 +1,8 @@
-﻿namespace CarBook.EntityLayer.Concrete
+﻿using CarBook.DTOLayer.DTOs.CarDTOs;
+
+namespace CarBook.DTOLayer.DTOs.CarFeatureDTOs
 {
-    public class CarFeature
+    public class CarFeatureDTO
     {
         public int CarFeatureID { get; set; }
         public string FeatureName1 { get; set; }
@@ -35,6 +37,6 @@
         public bool HasFeature15 { get; set; }
 
         public int CarID { get; set; }
-        public Car Car { get; set; }
+        public CarDTO Car { get; set; }
     }
 }
