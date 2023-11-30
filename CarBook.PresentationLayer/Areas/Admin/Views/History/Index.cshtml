@@ -1,4 +1,4 @@
-﻿@model List<About>
+﻿@model List<History>
 
 @{
     ViewData["Title"] = "Index";
@@ -11,7 +11,7 @@
 
 <div class="container">
     <br />
-    <h1>Hakkımızda Listesi</h1>
+    <h1>Hikaye Listesi</h1>
     <br />
     <table class="table table-bordered">
         <tr>
@@ -39,7 +39,7 @@
                 {
                     <td>
                         <a href="#" id="DescriptionBtn"
-                           onclick="return descriptionAbout('@item.Description', '@item.AboutID')">
+                           onclick="return descriptionHistory('@item.Description', '@item.HistoryID')">
                             @item.Description.Substring(0, 10)...
                         </a>
                     </td>
@@ -61,27 +61,27 @@
                     @{
                         if (item.Status == true)
                         {
-                            <button onclick="updateStatus(@item.AboutID)" type="submit" class="btn btn-success">Aktif</button>
+                            <button onclick="updateStatus(@item.HistoryID)" type="submit" class="btn btn-success">Aktif</button>
                         }
                         else
                         {
-                            <button onclick="updateStatus(@item.AboutID)" type="submit" class="btn btn-danger">Pasif</button>
+                            <button onclick="updateStatus(@item.HistoryID)" type="submit" class="btn btn-danger">Pasif</button>
                         }
                     }
                 </td>
                 <td>
-                    <button onclick="deleteAbout(@item.AboutID)" type="submit" class="btn btn-outline-danger">Sil</button>
+                    <button onclick="deleteHistory(@item.HistoryID)" type="submit" class="btn btn-outline-danger">Sil</button>
                 </td>
-                <td><a href="/Admin/About/UpdateAbout/@item.AboutID" class="btn btn-outline-primary">Güncelle</a></td>
+                <td><a href="/Admin/History/UpdateHistory/@item.HistoryID" class="btn btn-outline-primary">Güncelle</a></td>
             </tr>
         }
     </table>
-    <a href="/Admin/About/CreateAbout/" class="btn btn-outline-primary">Yeni Hakkımızda Girişi</a>
+    <a href="/Admin/History/CreateHistory/" class="btn btn-outline-primary">Yeni Hikaye Girişi</a>
 </div>
 
 
 <script>
-    function descriptionAbout(description, id) {
+    function descriptionHistory(description, id) {
         Swal.fire({
             title: 'Açıklama',
             text: description,
@@ -91,14 +91,14 @@
             cancelButtonText: 'Tamam'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "/Admin/About/UpdateAbout?id=" + id;
+                window.location.href = "/Admin/History/UpdateHistory?id=" + id;
             }
         });
     }
 </script>
 
 <script>
-    function deleteAbout(id) {
+    function deleteHistory(id) {
         Swal.fire({
             title: 'Silmek istediğinize emin misiniz?',
             text: 'Bu öğeyi silerseniz geri alamazsınız!',
@@ -108,7 +108,7 @@
             cancelButtonText: 'İptal'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "/Admin/About/DeleteAbout?id=" + id;
+                window.location.href = "/Admin/History/DeleteHistory?id=" + id;
             }
         });
     }
@@ -125,7 +125,7 @@
             cancelButtonText: 'İptal'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "/Admin/About/UpdateAboutStatus?id=" + id;
+                window.location.href = "/Admin/History/UpdateHistoryStatus?id=" + id;
             }
         });
     }

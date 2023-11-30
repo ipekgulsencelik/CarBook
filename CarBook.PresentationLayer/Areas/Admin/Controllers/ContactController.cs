@@ -2,7 +2,9 @@
 
 namespace CarBook.PresentationLayer.Areas.Admin.Controllers
 {
-    public class ContactController : Controller
+	[Area("Admin")]
+	[Route("[area]/[controller]/[action]")]
+	public class ContactController : Controller
     {
         public IActionResult Index()
         {

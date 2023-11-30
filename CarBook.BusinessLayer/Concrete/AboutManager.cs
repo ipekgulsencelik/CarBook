@@ -42,5 +42,10 @@ namespace CarBook.BusinessLayer.Concrete
         {
             _aboutDAL.Update(entity);
         }
+
+        public void TUpdateStatus(About about)
+        {
+            _aboutDAL.UpdateStatus(about);
+        }
     }
 }

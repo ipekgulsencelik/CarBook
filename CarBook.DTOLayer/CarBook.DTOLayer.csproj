@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="DTOs\LocationDTOs\" />
-    <Folder Include="DTOs\AboutDTOs\" />
     <Folder Include="DTOs\StatusDTOs\" />
     <Folder Include="DTOs\PriceDTOs\" />
   </ItemGroup>

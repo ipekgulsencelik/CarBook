@@ -59,6 +59,9 @@ builder.Services.AddScoped<ITeamService, TeamManager>();
 builder.Services.AddScoped<IAboutDAL, EFAboutDAL>();
 builder.Services.AddScoped<IAboutService, AboutManager>();
 
+builder.Services.AddScoped<IHistoryDAL, EFHistoryDAL>();
+builder.Services.AddScoped<IHistoryService, HistoryManager>();
+
 builder.Services.AddControllersWithViews().AddFluentValidation();
 
 builder.Services.AddControllersWithViews().AddJsonOptions(options =>
